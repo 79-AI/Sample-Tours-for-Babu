@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ant Adventures | Vietnam Program Overview & Sample Tours</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@400;700&display=swap');
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Lato',sans-serif; background:#FAF7F2; color:#2b2b2b; }
+
+  .hero { background: linear-gradient(135deg, #2E7D52 0%, #1f5c3a 100%); color:#fff; text-align:center; padding:60px 24px 46px; }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:38px; margin:0 0 10px; }
+  .hero p { font-size:16px; opacity:0.92; max-width:640px; margin:0 auto; }
+  .hero p.prepared-for { font-size:13px; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; opacity:0.85; margin:0 0 14px; }
+
+  nav.section-nav { position: sticky; top:0; z-index:60; background:#fff; display:flex; justify-content:center; gap:0; box-shadow:0 2px 10px rgba(0,0,0,0.08); flex-wrap:wrap; }
+  nav.section-nav a { padding:14px 18px; text-decoration:none; color:#2E7D52; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.03em; }
+  nav.section-nav a:hover { color:#E8472A; background:#f4f8f5; }
+
+  .section { max-width:1100px; margin:0 auto; padding:52px 24px; scroll-margin-top:56px; }
+  .section-title { text-align:center; margin-bottom:8px; }
+  .section-title h2 { font-family:'Playfair Display',serif; font-size:28px; color:#2E7D52; margin:0 0 8px; }
+  .section-title p { color:#666; font-size:14.5px; max-width:640px; margin:0 auto 34px; text-align:center; }
+
+  .value-grid, .client-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+  .value-card, .client-card { flex:1 1 230px; max-width:300px; background:#fff; border-radius:12px; padding:24px 22px; box-shadow:0 2px 14px rgba(0,0,0,0.06); border-top:3px solid #E8472A; }
+  .value-card h3, .client-card h3 { font-family:'Playfair Display',serif; font-size:17px; color:#2E7D52; margin:0 0 8px; }
+  .value-card p, .client-card p { font-size:13.5px; color:#555; line-height:1.6; margin:0; }
+
+  .flow-wrap { display:flex; align-items:flex-start; gap:6px; overflow-x:auto; padding-bottom:10px; }
+  .flow-stage { flex:1 1 240px; min-width:230px; background:#fff; border-radius:14px; padding:18px 18px 14px; box-shadow:0 2px 14px rgba(0,0,0,0.06); }
+  .stage-label { display:flex; align-items:center; gap:10px; font-family:'Playfair Display',serif; font-size:15.5px; font-weight:700; color:#2E7D52; margin-bottom:14px; padding-bottom:12px; border-bottom:2px solid #FAF7F2; }
+  .stage-num { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background:#E8472A; color:#fff; font-family:'Lato',sans-serif; font-size:12px; font-weight:700; flex-shrink:0; animation: pulseNum 2.6s ease-in-out infinite; }
+  .stage-items { list-style:none; margin:0; padding:0; position:relative; }
+  .stage-items::before { content:""; position:absolute; left:5px; top:4px; bottom:4px; width:2px; background:repeating-linear-gradient(#2E7D52,#2E7D52 4px,transparent 4px,transparent 8px); }
+  .flow-item { position:relative; display:flex; gap:14px; padding:0 0 16px 0; }
+  .flow-item:last-child { padding-bottom:0; }
+  .flow-dot { position:relative; z-index:1; flex-shrink:0; width:12px; height:12px; margin-top:3px; border-radius:50%; background:#2E7D52; box-shadow:0 0 0 3px #fff, 0 0 0 4px #FAF7F2; transition: transform .2s ease, background .2s ease; }
+  .flow-item:hover .flow-dot { background:#E8472A; transform: scale(1.25); }
+  .flow-item-body { flex:1; transition: transform .2s ease; }
+  .flow-item:hover .flow-item-body { transform: translateX(3px); }
+  .flow-item-body h4 { margin:0 0 4px; font-size:13.5px; color:#222; }
+  .flow-item-body p { margin:0; font-size:12.5px; color:#666; line-height:1.5; }
+  .flow-arrow { flex:0 0 auto; align-self:center; color:#E8472A; opacity:0.75; animation: driftArrow 1.8s ease-in-out infinite; padding-top:26px; }
+  @keyframes pulseNum { 0%,100% { box-shadow:0 0 0 0 rgba(232,71,42,0.4); } 50% { box-shadow:0 0 0 6px rgba(232,71,42,0); } }
+  @keyframes driftArrow { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+  @media (max-width:900px) {
+    .flow-wrap { flex-direction:column; }
+    .flow-arrow { transform: rotate(90deg); padding:2px 0; align-self:flex-start; margin-left:24px; }
+    @keyframes driftArrow { 0%,100% { transform: rotate(90deg) translateX(0); } 50% { transform: rotate(90deg) translateX(4px); } }
+  }
+
+  .hotel-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:20px; }
+  .hotel-region-card { background:#fff; border-radius:12px; padding:20px 22px 8px; box-shadow:0 2px 14px rgba(0,0,0,0.06); }
+  .hotel-region-card h3 { font-family:'Playfair Display',serif; font-size:17px; color:#2E7D52; margin:0 0 12px; border-bottom:2px solid #FAF7F2; padding-bottom:10px; }
+  .hotel-region-card ul { list-style:none; margin:0; padding:0; }
+  .hotel-region-card li { padding:10px 0; border-bottom:1px solid #f1efe9; }
+  .hotel-region-card li:last-child { border-bottom:none; }
+  .hotel-name-row { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .hotel-name { font-weight:700; font-size:13.5px; color:#2b2b2b; }
+  .hotel-star { font-size:10.5px; font-weight:700; color:#fff; background:#E8472A; border-radius:10px; padding:2px 9px; white-space:nowrap; }
+  .hotel-note { font-size:12.5px; color:#777; margin-top:3px; line-height:1.45; }
+  .hotel-flex-note { margin-top:20px; text-align:center; font-size:13.5px; font-style:italic; color:#666; max-width:700px; margin-left:auto; margin-right:auto; }
+
+  .local-box { background:#fff; border-radius:12px; padding:30px 32px; box-shadow:0 2px 14px rgba(0,0,0,0.06); border-left:5px solid #2E7D52; max-width:820px; margin:0 auto; }
+  .local-box p { font-size:15px; line-height:1.75; color:#3a3a3a; margin:0; }
+
+  .team-intro-box { background:#eef1f6; border-left:4px solid #1f2a44; border-radius:8px; padding:20px 24px; font-size:14.5px; line-height:1.7; color:#333; max-width:900px; margin:0 auto 32px; }
+  .subsection-heading { font-family:'Playfair Display',serif; font-size:19px; color:#2E7D52; text-align:center; margin:40px 0 20px; }
+  .founder-grid, .guide-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:24px; }
+  .founder-card, .guide-card { background:#fff; border-radius:12px; padding:24px; box-shadow:0 2px 14px rgba(0,0,0,0.07); border-top:4px solid #2E7D52; }
+  .founder-head { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .avatar { flex-shrink:0; width:52px; height:52px; border-radius:50%; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:700; font-size:16px; }
+  .founder-head h3 { margin:0 0 3px; font-family:'Playfair Display',serif; font-size:18px; color:#1a1a1a; }
+  .founder-title { font-size:12.5px; color:#777; line-height:1.4; }
+  .bio-box { background:#eaf3ee; border-left:4px solid #2E7D52; border-radius:8px; padding:14px 16px; font-size:13.5px; line-height:1.65; color:#2b2b2b; margin-bottom:16px; }
+  .tl-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+  .tl-item { background:#f6f5f0; border-radius:8px; padding:12px 14px; }
+  .tl-period { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:#2E7D52; margin-bottom:4px; }
+  .tl-headline { font-size:13px; font-weight:700; color:#222; margin-bottom:3px; }
+  .tl-desc { font-size:12px; color:#666; line-height:1.5; }
+  .stat-row { display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+  .stat-pill { flex:1 1 120px; background:#FAF7F2; border-radius:8px; padding:10px 14px; }
+  .stat-label { font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; color:#888; margin-bottom:4px; }
+  .stat-value { font-family:'Playfair Display',serif; font-size:19px; font-weight:700; color:#2E7D52; }
+  .quote-box { background:#1f2a44; color:#fff; border-radius:8px; padding:16px 18px; font-size:13.5px; font-style:italic; line-height:1.6; }
+  .quote-box span { display:block; margin-top:8px; font-style:normal; font-size:12px; color:#b9c2d6; }
+  .philosophy-box { background:#fff7ee; border-left:4px solid #E8472A; border-radius:8px; padding:14px 16px; margin-bottom:16px; }
+  .philosophy-box b { display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:#E8472A; margin-bottom:6px; }
+  .philosophy-box p { margin:0; font-size:13.5px; line-height:1.6; color:#5a4632; }
+  .collab-closing { margin-top:26px; text-align:center; font-size:13.5px; font-style:italic; color:#666; max-width:700px; margin-left:auto; margin-right:auto; }
+  .start-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; max-width:820px; margin:0 auto; }
+  .start-step { background:#fff; border-radius:12px; padding:22px 22px 20px; box-shadow:0 2px 14px rgba(0,0,0,0.06); border-left:4px solid #2E7D52; }
+  .start-num { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:#E8472A; color:#fff; font-family:'Playfair Display',serif; font-weight:700; font-size:13px; margin-bottom:12px; }
+  .start-step h4 { margin:0 0 8px; font-size:15px; color:#2E7D52; font-family:'Playfair Display',serif; }
+  .start-step p { margin:0; font-size:13.5px; color:#555; line-height:1.6; }
+  @media (max-width:520px) { .tl-grid { grid-template-columns:1fr; } }
+
+  nav.tour-subnav { position: sticky; top:47px; z-index:55; background:#fbfaf8; display:flex; overflow-x:auto; box-shadow:0 2px 8px rgba(0,0,0,0.05); border-radius:8px; margin-bottom:8px; }
+  nav.tour-subnav a { flex:1 0 auto; text-align:center; padding:10px 12px; text-decoration:none; color:#2E7D52; font-weight:700; font-size:12px; border-right:1px solid #eee; white-space:nowrap; }
+  nav.tour-subnav a:last-child { border-right:none; }
+  nav.tour-subnav a span { display:block; font-weight:400; color:#777; font-size:10.5px; margin-top:2px; }
+  nav.tour-subnav a:hover { background:#f4f8f5; color:#E8472A; }
+
+  .tour-section { padding: 34px 0 10px; scroll-margin-top: 100px; }
+  .tour-section:not(:last-child) { border-bottom: 2px dashed #e2ddd3; padding-bottom: 34px; }
+  .section-hero { margin-bottom: 18px; text-align:center; }
+  .tour-code-tag { display:inline-block; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:#E8472A; font-weight:700; margin-bottom:6px; }
+  .section-hero h3 { font-family:'Playfair Display',serif; font-size:24px; margin:0 0 6px; color:#2E7D52; }
+  .section-hero p.subtitle { font-size:15px; color:#555; margin:0 0 14px; }
+  .section-hero .meta-bar { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+  .section-hero .meta-chip { background:#fff; border:1px solid #e2ddd3; border-radius:8px; padding:7px 13px; font-size:12px; line-height:1.4; color:#444; }
+  .section-hero .meta-chip b { display:block; font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:#E8472A; margin-bottom:2px; }
+
+  .note-box { background:#fff7ee; border-left:4px solid #E8472A; padding:14px 18px; border-radius:6px; font-size:13.5px; line-height:1.6; margin-bottom:16px; color:#5a4632; }
+
+  table.itinerary { width:100%; border-collapse:collapse; background:#fff; box-shadow:0 2px 14px rgba(0,0,0,0.06); border-radius:10px; overflow:hidden; }
+  table.itinerary thead th { background:#2E7D52; color:#fff; text-align:left; padding:12px 14px; font-size:12px; text-transform:uppercase; letter-spacing:0.05em; }
+  table.itinerary tbody tr { border-bottom:1px solid #eee; }
+  table.itinerary tbody tr:last-child { border-bottom:none; }
+  table.itinerary tbody tr:nth-child(even) { background:#fbfaf8; }
+  table.itinerary td { padding:14px; vertical-align:top; font-size:14px; line-height:1.5; }
+  td.day-col { width:56px; text-align:center; font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:#E8472A; }
+  td.itin-col { width:180px; font-weight:700; color:#2E7D52; }
+  td.photo-col { width:150px; }
+  td.photo-col img { width:100%; height:92px; object-fit:cover; border-radius:6px; display:block; }
+
+  footer { text-align:center; padding:34px; font-size:13px; color:#888; }
+  footer a { color:#E8472A; text-decoration:none; font-weight:700; }
+
+  @media (max-width:720px) {
+    nav.section-nav a { padding:10px 10px; font-size:11.5px; }
+    table.itinerary, table.itinerary thead, table.itinerary tbody, table.itinerary th, table.itinerary td, table.itinerary tr { display:block; }
+    table.itinerary thead { display:none; }
+    table.itinerary tbody tr { margin-bottom:16px; border:1px solid #eee; border-radius:8px; padding:10px; }
+    td.day-col, td.itin-col, td.photo-col, td.desc-col { width:100% !important; text-align:left; }
+    td.photo-col img { height:150px; }
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <h1>The Ant Adventures</h1>
+    <p class="prepared-for">Prepared for Mr. Babu</p>
+    <p>Vietnam, thoughtfully arranged — small groups, families, and fully tailor-made journeys, never mass tourism. A complete reference to what we do, and seven sample tours in full detail.</p>
+  </div>
+
+  <nav class="section-nav">
+    <a href="#clients">Who We Serve</a>
+    <a href="#services">Services</a>
+    <a href="#hotels">Hotels</a>
+    <a href="#local">Local Experts</a>
+    <a href="#tours">Sample Tours</a>
+  </nav>
+
+  <section class="section" id="clients">
+    <div class="section-title">
+      <h2>Who We Serve</h2>
+      <p>Thomas's client base spans four profiles — each shapes how we design and deliver a trip.</p>
+    </div>
+    <div class="client-grid">
+      <div class="client-card">
+        <h3>Slow-Luxury Culture &amp; Cuisine Travelers</h3>
+        <p>Affluent leisure travelers wanting immersive, story-driven experiences — private chef tables, artisan visits, off-schedule cultural access.</p>
+      </div>
+      <div class="client-card">
+        <h3>Adventure &amp; Active Travelers</h3>
+        <p>Trekking, cycling, kayaking, and other physically engaging itineraries, still at a premium comfort level.</p>
+      </div>
+      <div class="client-card">
+        <h3>Family &amp; Multi-Generational Groups</h3>
+        <p>Itineraries balancing comfort, downtime, and variety across ages.</p>
+      </div>
+      <div class="client-card">
+        <h3>Business Travelers</h3>
+        <p>Full-service concierge for guests visiting Vietnam for work — transport, accommodation, interpreter support, and business-appropriate dining, with leisure as an optional add-on.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="section-title">
+      <h2>What We Can Do For You</h2>
+      <p>Beyond itineraries — how support flows from the moment a guest is booked to the moment they fly home.</p>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow-stage">
+        <div class="stage-label"><span class="stage-num">01</span>Before You Arrive</div>
+        <ul class="stage-items">
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Custom Tour Design</h4>
+                <p>From half-day city experiences to 21-day grand circuits, built around the guest's interests and pace.</p>
+              </div>
+            </li>
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Visa Arrangement</h4>
+                <p>Entry visa processing handled ahead of arrival, so guests land ready to go.</p>
+              </div>
+            </li>
+        </ul>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="flow-stage">
+        <div class="stage-label"><span class="stage-num">02</span>On Arrival</div>
+        <ul class="stage-items">
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Fast-Track Immigration</h4>
+                <p>Meet-and-greet at the aircraft door and expedited immigration/customs at major airports.</p>
+              </div>
+            </li>
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Private Transportation</h4>
+                <p>Dedicated vehicles and drivers, domestic flights, and train bookings including luxury and vintage carriages.</p>
+              </div>
+            </li>
+        </ul>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="flow-stage">
+        <div class="stage-label"><span class="stage-num">03</span>During Your Trip</div>
+        <ul class="stage-items">
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Hotel &amp; Resort Bookings</h4>
+                <p>5-star hotels, boutique properties, and private villas across all three regions.</p>
+              </div>
+            </li>
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Luxury Cruises</h4>
+                <p>Halong Bay, Lan Ha Bay, and Mekong River cruise bookings, cabin class matched to budget.</p>
+              </div>
+            </li>
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Guides &amp; Interpreters</h4>
+                <p>English-speaking national guides, local specialists, and interpreters for any language on request.</p>
+              </div>
+            </li>
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Restaurant &amp; Private Dining</h4>
+                <p>Reservations at top restaurants, private chef tables, and business dining arrangements.</p>
+              </div>
+            </li>
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Wellness &amp; Special Requests</h4>
+                <p>Spa bookings, dietary accommodations, accessibility needs, and celebration add-ons.</p>
+              </div>
+            </li>
+        </ul>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="flow-stage">
+        <div class="stage-label"><span class="stage-num">04</span>Always Available</div>
+        <ul class="stage-items">
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Security &amp; Protocol Escort</h4>
+                <p>Discreet close-protection or protocol escort available for VIP and high-profile guests.</p>
+              </div>
+            </li>
+          <li class="flow-item">
+              <span class="flow-dot"></span>
+              <div class="flow-item-body">
+                <h4>Special Arrangements on Request</h4>
+                <p>Private jet charters, helicopter transfers or scenic flights, and private yacht/cruise charters — arranged for guests who want an extra layer of exclusivity or need to move quickly between regions.</p>
+              </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="hotels">
+    <div class="section-title">
+      <h2>Hotels We Work With</h2>
+      <p>A working shortlist of 4- and 5-star properties by region — confirm current rates and room availability before quoting.</p>
+    </div>
+    <div class="hotel-grid">
+      <div class="hotel-region-card">
+        <h3>Hanoi</h3>
+        <ul>
+          <li><div class="hotel-name-row"><span class="hotel-name">Sofitel Legend Metropole Hanoi</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Colonial landmark in the heart of the Old Quarter</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Capella Hanoi</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Opera-inspired design steps from the Opera House</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">La Siesta Hanoi (Old Quarter / Diamond)</span><span class="hotel-star">4-Star</span></div><div class="hotel-note">Boutique, personal service, central location</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">JW Marriott Hotel Hanoi</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Modern flagship near the convention centre</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">InterContinental Hanoi Westlake</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Overwater pavilions on West Lake</div></li>
+        </ul>
+      </div>
+      <div class="hotel-region-card">
+        <h3>Central Vietnam (Hoi An / Da Nang / Hue)</h3>
+        <ul>
+          <li><div class="hotel-name-row"><span class="hotel-name">Four Seasons Resort The Nam Hai, Hoi An</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Beachfront pool villas south of Hoi An</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Anantara Hoi An Resort</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Riverside, in the Old Town setting</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">La Siesta Hoi An Resort &amp; Spa</span><span class="hotel-star">4-Star</span></div><div class="hotel-note">Boutique riverside resort</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Hoi An Beach Resort</span><span class="hotel-star">4-Star</span></div><div class="hotel-note">Beachfront, family-friendly</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">InterContinental Danang Sun Peninsula Resort</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Iconic hillside resort on Son Tra Peninsula</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Azerai La Residence, Hue</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Art Deco riverside former Governor's residence</div></li>
+        </ul>
+      </div>
+      <div class="hotel-region-card">
+        <h3>Saigon</h3>
+        <ul>
+          <li><div class="hotel-name-row"><span class="hotel-name">Park Hyatt Saigon</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Indochine elegance on Opera House Square</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">The Reverie Saigon</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Ultra-luxury in the Times Square Building</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Hotel des Arts Saigon, MGallery</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Art Deco boutique in District 1</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Caravelle Saigon</span><span class="hotel-star">4/5-Star</span></div><div class="hotel-note">Historic landmark on Lam Son Square</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Sofitel Saigon Plaza</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Riverside, business district</div></li>
+        </ul>
+      </div>
+      <div class="hotel-region-card">
+        <h3>Phu Quoc</h3>
+        <ul>
+          <li><div class="hotel-name-row"><span class="hotel-name">Cassia Cottage</span><span class="hotel-star">4-Star</span></div><div class="hotel-note">Boutique beachfront on Ong Lang Beach</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">JW Marriott Phu Quoc Emerald Bay</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Whimsical design resort, Emerald Bay</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">InterContinental Phu Quoc Long Beach Resort</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Long Beach, family &amp; couples</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">New World Phu Quoc Resort</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Family-friendly beachfront resort</div></li>
+        </ul>
+      </div>
+      <div class="hotel-region-card">
+        <h3>Con Dao</h3>
+        <ul>
+          <li><div class="hotel-name-row"><span class="hotel-name">Six Senses Con Dao</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Private beachfront pool villas</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Poulo Condor Boutique Resort &amp; Spa</span><span class="hotel-star">4/5-Star</span></div><div class="hotel-note">Small Luxury Hotels of the World member</div></li>
+        </ul>
+      </div>
+      <div class="hotel-region-card">
+        <h3>Mekong Delta</h3>
+        <ul>
+          <li><div class="hotel-name-row"><span class="hotel-name">Legacy Mekong, Cai Be</span><span class="hotel-star">4-Star</span></div><div class="hotel-note">Riverside boutique heritage estate</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Azerai Can Tho</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Riverside resort in Can Tho</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Victoria Can Tho Resort</span><span class="hotel-star">4-Star</span></div><div class="hotel-note">Colonial-style riverfront hotel</div></li>
+        </ul>
+      </div>
+      <div class="hotel-region-card">
+        <h3>Nha Trang</h3>
+        <ul>
+          <li><div class="hotel-name-row"><span class="hotel-name">Six Senses Ninh Van Bay</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Private bay, villa-only, boat access</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">InterContinental Nha Trang</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Beachfront city resort</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Amiana Resort Nha Trang</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Hillside and beachfront villas</div></li>
+        </ul>
+      </div>
+      <div class="hotel-region-card">
+        <h3>Quy Nhon</h3>
+        <ul>
+          <li><div class="hotel-name-row"><span class="hotel-name">Zannier Hotels Bai San Ho</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Secluded cove, ultra-luxury</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">Anantara Quy Nhon Villas</span><span class="hotel-star">5-Star</span></div><div class="hotel-note">Private peninsula villas</div></li>
+          <li><div class="hotel-name-row"><span class="hotel-name">AVANI Quy Nhon Resort &amp; Spa</span><span class="hotel-star">4-Star</span></div><div class="hotel-note">Beachfront, more accessible tier</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="hotel-flex-note">This is a working shortlist, not the full list — we work with many other hotels in every region, and always stay flexible to match the specific property, room type, and budget a guest requests.</div>
+  </section>
+
+  <section class="section" id="local">
+    <div class="section-title">
+      <h2>Working With Local Experts</h2>
+    </div>
+    <div class="local-box">
+      <p>Every itinerary is built alongside people who know the ground better than any guidebook — village elders in the northern highlands, boat families on the Mekong, artisans in Hoi An's workshops, and national park rangers in Cat Tien. Working directly with local experts means guests get access that can't be booked online, and it means tourism income reaches the communities hosting the trip, not just the hotels and coach operators. This is a standing commitment across every region we operate in, not a one-off add-on.</p>
+    </div>
+  </section>
+
+
+  <section class="section" id="tours">
+    <div class="section-title">
+      <h2>Sample Tours — Full Day-by-Day Detail</h2>
+      <p>Seven starting points — five fixed itineraries, one tailor-made framework, and one business travel template.</p>
+    </div>
+    <nav class="tour-subnav">
+      <a href="#tour1">Tour 1<span>Vietnam Grand Journey</span></a>
+      <a href="#tour2">Tour 2<span>Vietnam Panorama</span></a>
+      <a href="#tour3">Tour 3<span>North Vietnam: Sapa by Luxury Train</span></a>
+      <a href="#tour4">Tour 4<span>Central Vietnam by Vintage Train</span></a>
+      <a href="#tour5">Tour 5<span>Saigon, Mekong &amp; Cambodia by Speedboat</span></a>
+      <a href="#tour6">Tour 6<span>Tailor-Made Journey</span></a>
+      <a href="#tour7">Tour 7<span>Business Travel &amp; Concierge</span></a>
+    </nav>
+
+    <div class="tour-section" id="tour1">
+      <div class="section-hero">
+        <span class="tour-code-tag">Tour 1</span>
+        <h3>Vietnam Grand Journey</h3>
+        <p class="subtitle">The Classic Route, North to South — 5-Star Collection</p>
+        <div class="meta-bar">
+          <div class="meta-chip"><b>Duration</b>14 Days / 13 Nights</div>
+          <div class="meta-chip"><b>Route</b>Hanoi → Halong Bay → Ninh Binh → Hue → Da Nang/Hoi An → Saigon → Mekong Delta</div>
+          <div class="meta-chip"><b>Pace</b>Relaxed — classic sightseeing, private guided</div>
+          <div class="meta-chip"><b>Accommodation</b>5-star hotels &amp; luxury cruise throughout</div>
+        </div>
+      </div>
+      <table class="itinerary">
+        <thead>
+          <tr><th>Day</th><th>Itinerary</th><th>Brief Introduction &amp; Explanation</th><th>Photo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="day-col">D1</td><td class="itin-col">Arrive Hanoi</td><td class="desc-col">Private transfer into the Old Quarter as dusk settles over Hoan Kiem Lake. A welcome dinner introduces the quiet rhythm of the capital before the journey south begins.</td><td class="photo-col"><img src="images/tours/t1d1-arrive-hanoi.jpg" alt="Arrive Hanoi" loading="lazy"></td></tr>
+          <tr><td class="day-col">D2</td><td class="itin-col">Hanoi City in Full</td><td class="desc-col">Temple of Literature, the French Quarter, and the ceremony of egg coffee poured slow. Vietnam's thousand-year capital, read at walking pace.</td><td class="photo-col"><img src="images/tours/t1d2-hanoi-city.jpg" alt="Hanoi City in Full" loading="lazy"></td></tr>
+          <tr><td class="day-col">D3</td><td class="itin-col">Halong Bay – Embark Overnight Cruise</td><td class="desc-col">Limestone karsts rise straight from the water as a private cruise casts off. Evening squid-fishing on deck, the bay gone silver under the moon.</td><td class="photo-col"><img src="images/tours/t1d3-halong-embark.jpg" alt="Halong Bay – Embark Overnight Cruise" loading="lazy"></td></tr>
+          <tr><td class="day-col">D4</td><td class="itin-col">Halong Bay – Cruise &amp; Disembark</td><td class="desc-col">Sunrise tai chi on the sundeck, a cave visit by rowboat, then back to shore and on toward the limestone valleys of Ninh Binh.</td><td class="photo-col"><img src="images/tours/t1d4-halong-disembark.jpg" alt="Halong Bay – Cruise & Disembark" loading="lazy"></td></tr>
+          <tr><td class="day-col">D5</td><td class="itin-col">Ninh Binh – Trang An &amp; Mua Cave</td><td class="desc-col">A sampan drifts through flooded caves beneath towering karst — Halong Bay's inland twin. Those who climb Mua Cave's steps are rewarded with the valley laid out below.</td><td class="photo-col"><img src="images/tours/t1d5-ninhbinh-trangan.jpg" alt="Ninh Binh – Trang An & Mua Cave" loading="lazy"></td></tr>
+          <tr><td class="day-col">D6</td><td class="itin-col">Fly to Hue – Imperial Citadel</td><td class="desc-col">The old royal capital, walled and moated, its Forbidden Purple City still holding the hush of dynasties past.</td><td class="photo-col"><img src="images/tours/t1d6-hue-citadel.jpg" alt="Fly to Hue – Imperial Citadel" loading="lazy"></td></tr>
+          <tr><td class="day-col">D7</td><td class="itin-col">Hue to Hoi An via Hai Van Pass</td><td class="desc-col">The coastal road climbs into cloud at Hai Van Pass — one of the great drives of Vietnam — before the Golden Bridge's stone hands at Ba Na Hills and on to Hoi An.</td><td class="photo-col"><img src="images/tours/t1d7-haivan-pass.jpg" alt="Hue to Hoi An via Hai Van Pass" loading="lazy"></td></tr>
+          <tr><td class="day-col">D8</td><td class="itin-col">Hoi An Ancient Town</td><td class="desc-col">Lantern-lit lanes, tailor ateliers, and a town that has traded quietly with the world since the 15th century.</td><td class="photo-col"><img src="images/tours/t1d8-hoian-ancient.jpg" alt="Hoi An Ancient Town" loading="lazy"></td></tr>
+          <tr><td class="day-col">D9</td><td class="itin-col">Coconut Village – Fly to Saigon</td><td class="desc-col">A basket-boat spin through the palm-lined waterways of Cam Thanh, then south by air into the neon hum of Ho Chi Minh City.</td><td class="photo-col"><img src="images/tours/t1d9-coconut-village.jpg" alt="Coconut Village – Fly to Saigon" loading="lazy"></td></tr>
+          <tr><td class="day-col">D10</td><td class="itin-col">Saigon City Tour</td><td class="desc-col">Notre-Dame Cathedral, the Reunification Palace, and Ben Thanh Market's tangle of scent and colour — old Saigon and new, side by side.</td><td class="photo-col"><img src="images/tours/t1d10-saigon-citytour.jpg" alt="Saigon City Tour" loading="lazy"></td></tr>
+          <tr><td class="day-col">D11</td><td class="itin-col">Cu Chi Tunnels &amp; Saigon by Night</td><td class="desc-col">A morning underground in the wartime tunnel network, an evening above ground for a street-food crawl through Saigon's night markets.</td><td class="photo-col"><img src="images/tours/t1d11-cuchi-tunnels.jpg" alt="Cu Chi Tunnels & Saigon by Night" loading="lazy"></td></tr>
+          <tr><td class="day-col">D12</td><td class="itin-col">Mekong Delta Day Trip</td><td class="desc-col">Floating markets, fruit orchards, and villages that live by the tide — a full day on the water in Vietnam's rice basket.</td><td class="photo-col"><img src="images/tours/t1d12-mekong-daytrip.jpg" alt="Mekong Delta Day Trip" loading="lazy"></td></tr>
+          <tr><td class="day-col">D13</td><td class="itin-col">Free Day &amp; Farewell Dinner</td><td class="desc-col">A day left open — rooftop bar, spa, or one last wander — closing with a farewell dinner over the Saigon River skyline.</td><td class="photo-col"><img src="images/tours/t1d13-freeday-saigon.jpg" alt="Free Day & Farewell Dinner" loading="lazy"></td></tr>
+          <tr><td class="day-col">D14</td><td class="itin-col">Departure</td><td class="desc-col">Final souvenirs at Ben Thanh Market, then private transfer to the airport.</td><td class="photo-col"><img src="images/tours/t1d14-departure-benthanh.jpg" alt="Departure" loading="lazy"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tour-section" id="tour2">
+      <div class="section-hero">
+        <span class="tour-code-tag">Tour 2</span>
+        <h3>Vietnam Panorama</h3>
+        <p class="subtitle">Classic Route + Trekking &amp; Nature, North to South</p>
+        <div class="meta-bar">
+          <div class="meta-chip"><b>Duration</b>14 Days / 13 Nights</div>
+          <div class="meta-chip"><b>Route</b>Hanoi → Sapa → Halong Bay → Ninh Binh → Hue → Hoi An → Saigon → Cat Tien</div>
+          <div class="meta-chip"><b>Pace</b>Active — trekking days combined with classic sightseeing</div>
+          <div class="meta-chip"><b>Accommodation</b>4–5-star hotels, mountain lodges &amp; luxury cruise</div>
+        </div>
+      </div>
+      <table class="itinerary">
+        <thead>
+          <tr><th>Day</th><th>Itinerary</th><th>Brief Introduction &amp; Explanation</th><th>Photo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="day-col">D1</td><td class="itin-col">Arrive Hanoi</td><td class="desc-col">The Old Quarter's motorbike hum and lakeside calm — first steps into Vietnam before the mountains call.</td><td class="photo-col"><img src="images/tours/t2d1-arrive-hanoi.jpg" alt="Arrive Hanoi" loading="lazy"></td></tr>
+          <tr><td class="day-col">D2</td><td class="itin-col">Hanoi City Tour</td><td class="desc-col">The Opera House, French colonial streets, and a city that wears its history in layers.</td><td class="photo-col"><img src="images/tours/t2d2-hanoi-citytour.jpg" alt="Hanoi City Tour" loading="lazy"></td></tr>
+          <tr><td class="day-col">D3</td><td class="itin-col">Overnight Train to Sapa</td><td class="desc-col">An evening sleeper train climbs north into the mountains, cabins rocking gently toward Lao Cai.</td><td class="photo-col"><img src="images/tours/t2d3-train-to-sapa.jpg" alt="Overnight Train to Sapa" loading="lazy"></td></tr>
+          <tr><td class="day-col">D4</td><td class="itin-col">Sapa Trek – Cat Cat &amp; Muong Hoa Valley</td><td class="desc-col">Terraced rice fields cut into near-vertical hillsides, H'mong villages along the trail, the Hoang Lien Son range on the horizon.</td><td class="photo-col"><img src="images/tours/t2d4-sapa-catcat.jpg" alt="Sapa Trek – Cat Cat & Muong Hoa Valley" loading="lazy"></td></tr>
+          <tr><td class="day-col">D5</td><td class="itin-col">Sapa Trek – Ta Van &amp; Giang Ta Chai</td><td class="desc-col">Deeper into the valley on foot, past waterwheels and homestays, ending with tea in a hillside village.</td><td class="photo-col"><img src="images/tours/t2d5-sapa-tavan.jpg" alt="Sapa Trek – Ta Van & Giang Ta Chai" loading="lazy"></td></tr>
+          <tr><td class="day-col">D6</td><td class="itin-col">Return to Hanoi – Halong Bay Cruise</td><td class="desc-col">Back down from the mountains and straight out to sea — a private cruise casts off into Halong Bay's karst maze by afternoon.</td><td class="photo-col"><img src="images/tours/t2d6-return-halong.jpg" alt="Return to Hanoi – Halong Bay Cruise" loading="lazy"></td></tr>
+          <tr><td class="day-col">D7</td><td class="itin-col">Halong Bay Kayak &amp; Ninh Binh</td><td class="desc-col">Morning kayak through hidden lagoons, then transfer inland to the limestone valleys of Ninh Binh.</td><td class="photo-col"><img src="images/tours/t2d7-halong-kayak.jpg" alt="Halong Bay Kayak & Ninh Binh" loading="lazy"></td></tr>
+          <tr><td class="day-col">D8</td><td class="itin-col">Ninh Binh – Trang An, Mua Cave &amp; Cycling</td><td class="desc-col">A sampan through flooded caves, a climb to Mua Cave's viewpoint, and an easy bike ride through rice-paddy villages.</td><td class="photo-col"><img src="images/tours/t2d8-ninhbinh-cycling.jpg" alt="Ninh Binh – Trang An, Mua Cave & Cycling" loading="lazy"></td></tr>
+          <tr><td class="day-col">D9</td><td class="itin-col">Fly to Hue – Imperial Citadel</td><td class="desc-col">The walled royal city and a dragon boat drift on the Perfume River at day's end.</td><td class="photo-col"><img src="images/tours/t2d9-hue-citadel.jpg" alt="Fly to Hue – Imperial Citadel" loading="lazy"></td></tr>
+          <tr><td class="day-col">D10</td><td class="itin-col">Hue to Hoi An via Hai Van Pass (Cycling Option)</td><td class="desc-col">The coast road over Hai Van Pass, cycling optional on the descent, then on to Hoi An's lantern light.</td><td class="photo-col"><img src="images/tours/t2d10-haivan-cycling.jpg" alt="Hue to Hoi An via Hai Van Pass" loading="lazy"></td></tr>
+          <tr><td class="day-col">D11</td><td class="itin-col">Hoi An Ancient Town &amp; Cham Islands</td><td class="desc-col">A boat out to the Cham Islands for snorkeling and quiet beaches, or a slower day exploring Hoi An's tailor shops and temples.</td><td class="photo-col"><img src="images/tours/t2d11-hoian-cham.jpg" alt="Hoi An Ancient Town & Cham Islands" loading="lazy"></td></tr>
+          <tr><td class="day-col">D12</td><td class="itin-col">Fly to Saigon</td><td class="desc-col">The Saigon River lit up at dusk — the south's fast pulse after the mountains and coast.</td><td class="photo-col"><img src="images/tours/t2d12-fly-saigon.jpg" alt="Fly to Saigon" loading="lazy"></td></tr>
+          <tr><td class="day-col">D13</td><td class="itin-col">Cat Tien National Park – Jungle Trek</td><td class="desc-col">A day trek through primary rainforest, tracking gibbons and hornbills with a park naturalist.</td><td class="photo-col"><img src="images/tours/t2d13-cattien-trek.jpg" alt="Cat Tien National Park – Jungle Trek" loading="lazy"></td></tr>
+          <tr><td class="day-col">D14</td><td class="itin-col">Departure</td><td class="desc-col">A final coffee near the Central Post Office before the airport transfer.</td><td class="photo-col"><img src="images/tours/t2d14-departure-postoffice.jpg" alt="Departure" loading="lazy"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tour-section" id="tour3">
+      <div class="section-hero">
+        <span class="tour-code-tag">Tour 3</span>
+        <h3>North Vietnam: Sapa by Luxury Train</h3>
+        <p class="subtitle">Trekking &amp; Nature Focus, Mountain North</p>
+        <div class="meta-bar">
+          <div class="meta-chip"><b>Duration</b>7 Days / 6 Nights (adjustable)</div>
+          <div class="meta-chip"><b>Route</b>Hanoi → Sapa (luxury overnight train) → road transfer back to Hanoi</div>
+          <div class="meta-chip"><b>Pace</b>Active — 2–3 days of guided trekking</div>
+          <div class="meta-chip"><b>Accommodation</b>5-star Hanoi hotel + luxury mountain lodge, private luxury train cabin</div>
+        </div>
+      </div>
+      <table class="itinerary">
+        <thead>
+          <tr><th>Day</th><th>Itinerary</th><th>Brief Introduction &amp; Explanation</th><th>Photo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="day-col">D1</td><td class="itin-col">Arrive Hanoi</td><td class="desc-col">Old Quarter welcome dinner, a first taste of the capital before heading for the hills.</td><td class="photo-col"><img src="images/tours/t3d1-arrive-hanoi.jpg" alt="Arrive Hanoi" loading="lazy"></td></tr>
+          <tr><td class="day-col">D2</td><td class="itin-col">Hanoi Highlights – Board the Luxury Night Train</td><td class="desc-col">A day in the capital, then an evening boarding of the restored luxury sleeper carriage north to Lao Cai — a slower, more romantic way into the mountains.</td><td class="photo-col"><img src="images/tours/t3d2-night-train.jpg" alt="Hanoi Highlights – Board the Luxury Night Train" loading="lazy"></td></tr>
+          <tr><td class="day-col">D3</td><td class="itin-col">Arrive Sapa – Cat Cat Village Trek</td><td class="desc-col">Morning arrival in Lao Cai, drive up to Sapa, and an easy first trek through Cat Cat's waterfalls and H'mong houses.</td><td class="photo-col"><img src="images/tours/t3d3-sapa-catcat-village.jpg" alt="Arrive Sapa – Cat Cat Village Trek" loading="lazy"></td></tr>
+          <tr><td class="day-col">D4</td><td class="itin-col">Full-Day Trek – Ta Van, Lao Chai &amp; Giang Ta Chai</td><td class="desc-col">The valley's full circuit on foot — rice terraces, suspension bridges, and lunch in a Dao village home.</td><td class="photo-col"><img src="images/tours/t3d4-tavan-laochai-trek.jpg" alt="Full-Day Trek – Ta Van, Lao Chai & Giang Ta Chai" loading="lazy"></td></tr>
+          <tr><td class="day-col">D5</td><td class="itin-col">Fansipan or Silver Waterfall</td><td class="desc-col">A choice of days: the cable car to Fansipan's summit, the 'Roof of Indochina', or a gentler visit to Silver Waterfall and Tram Ton Pass.</td><td class="photo-col"><img src="images/tours/t3d5-fansipan.jpg" alt="Fansipan or Silver Waterfall" loading="lazy"></td></tr>
+          <tr><td class="day-col">D6</td><td class="itin-col">Scenic Road Transfer Back to Hanoi</td><td class="desc-col">A private car winds back down through the mountains, the terraces and passes one last time before the flat delta returns.</td><td class="photo-col"><img src="images/tours/t3d6-scenic-transfer.jpg" alt="Scenic Road Transfer Back to Hanoi" loading="lazy"></td></tr>
+          <tr><td class="day-col">D7</td><td class="itin-col">Departure</td><td class="desc-col">Free morning in Hanoi, then transfer to the airport.</td><td class="photo-col"><img src="images/tours/t3d7-departure-oldquarter.jpg" alt="Departure" loading="lazy"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tour-section" id="tour4">
+      <div class="section-hero">
+        <span class="tour-code-tag">Tour 4</span>
+        <h3>Central Vietnam by Vintage Train</h3>
+        <p class="subtitle">Hue – Da Nang – Hoi An – Quy Nhon</p>
+        <div class="meta-bar">
+          <div class="meta-chip"><b>Duration</b>7 Days / 6 Nights (adjustable)</div>
+          <div class="meta-chip"><b>Route</b>Hue → Da Nang → Hoi An → Quy Nhon (vintage train)</div>
+          <div class="meta-chip"><b>Pace</b>Relaxed — heritage, coast &amp; one scenic rail journey</div>
+          <div class="meta-chip"><b>Accommodation</b>5-star hotels &amp; resorts, private vintage train carriage</div>
+        </div>
+      </div>
+      <table class="itinerary">
+        <thead>
+          <tr><th>Day</th><th>Itinerary</th><th>Brief Introduction &amp; Explanation</th><th>Photo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="day-col">D1</td><td class="itin-col">Arrive Hue</td><td class="desc-col">Transfer into the old imperial capital, its citadel walls quiet against the evening light.</td><td class="photo-col"><img src="images/tours/t4d1-arrive-hue.jpg" alt="Arrive Hue" loading="lazy"></td></tr>
+          <tr><td class="day-col">D2</td><td class="itin-col">Hue – Perfume River &amp; Royal Tombs</td><td class="desc-col">A dragon boat drifts the Perfume River to Thien Mu Pagoda, then on to the moss-covered royal tombs outside the city.</td><td class="photo-col"><img src="images/tours/t4d2-perfume-river.jpg" alt="Hue – Perfume River & Royal Tombs" loading="lazy"></td></tr>
+          <tr><td class="day-col">D3</td><td class="itin-col">Hue to Hoi An via Hai Van Pass</td><td class="desc-col">One of Vietnam's great coastal drives, cloud-wrapped Hai Van Pass, then the Golden Bridge at Ba Na Hills en route to Hoi An.</td><td class="photo-col"><img src="images/tours/t4d3-haivan-pass.jpg" alt="Hue to Hoi An via Hai Van Pass" loading="lazy"></td></tr>
+          <tr><td class="day-col">D4</td><td class="itin-col">Hoi An Ancient Town</td><td class="desc-col">Lantern-lit lanes by night, tailor shops and temples by day — a trading port frozen in amber light.</td><td class="photo-col"><img src="images/tours/t4d4-hoian-ancient.jpg" alt="Hoi An Ancient Town" loading="lazy"></td></tr>
+          <tr><td class="day-col">D5</td><td class="itin-col">Board the Vintage Train to Quy Nhon</td><td class="desc-col">Back to Da Nang to board a beautifully restored vintage carriage — velvet seats and open windows for a slow, scenic ride down the coast to Quy Nhon.</td><td class="photo-col"><img src="images/tours/t4d5-vintage-train.jpg" alt="Board the Vintage Train to Quy Nhon" loading="lazy"></td></tr>
+          <tr><td class="day-col">D6</td><td class="itin-col">Quy Nhon – Ky Co &amp; Eo Gio</td><td class="desc-col">Hidden coves, turquoise water, and a coastline still largely undiscovered by mass tourism.</td><td class="photo-col"><img src="images/tours/t4d6-quynhon-kyco.jpg" alt="Quy Nhon – Ky Co & Eo Gio" loading="lazy"></td></tr>
+          <tr><td class="day-col">D7</td><td class="itin-col">Quy Nhon Leisure &amp; Departure</td><td class="desc-col">A final slow morning by the beach before transfer to the airport.</td><td class="photo-col"><img src="images/tours/t4d7-quynhon-departure.jpg" alt="Quy Nhon Leisure & Departure" loading="lazy"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tour-section" id="tour5">
+      <div class="section-hero">
+        <span class="tour-code-tag">Tour 5</span>
+        <h3>Saigon, Mekong &amp; Cambodia by Speedboat</h3>
+        <p class="subtitle">South Vietnam Focus</p>
+        <div class="meta-bar">
+          <div class="meta-chip"><b>Duration</b>5 Days / 4 Nights</div>
+          <div class="meta-chip"><b>Route</b>Saigon → Cu Chi → Mekong Delta (3 days) → Speedboat to Phnom Penh, Cambodia</div>
+          <div class="meta-chip"><b>Pace</b>Relaxed — city, tunnels &amp; river</div>
+          <div class="meta-chip"><b>Accommodation</b>5-star Saigon hotel + boutique Mekong riverside stays</div>
+        </div>
+      </div>
+      <table class="itinerary">
+        <thead>
+          <tr><th>Day</th><th>Itinerary</th><th>Brief Introduction &amp; Explanation</th><th>Photo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="day-col">D1</td><td class="itin-col">Arrive Saigon – City Tour</td><td class="desc-col">Notre-Dame Cathedral, the Reunification Palace, and Ben Thanh Market's tangle of scent and colour on the first afternoon.</td><td class="photo-col"><img src="images/tours/t5d1-arrive-saigon.jpg" alt="Arrive Saigon – City Tour" loading="lazy"></td></tr>
+          <tr><td class="day-col">D2</td><td class="itin-col">Cu Chi Tunnels &amp; Saigon by Night</td><td class="desc-col">A morning underground in the wartime tunnel network, an evening street-food crawl through the city's night markets.</td><td class="photo-col"><img src="images/tours/t5d2-cuchi-nightmarket.jpg" alt="Cu Chi Tunnels & Saigon by Night" loading="lazy"></td></tr>
+          <tr><td class="day-col">D3</td><td class="itin-col">Mekong Delta Day 1 – Cai Be &amp; Vinh Long</td><td class="desc-col">Into the delta by road and boat — floating markets, fruit orchards, and villages that live by the tide, overnighting on the riverside.</td><td class="photo-col"><img src="images/tours/t5d3-caibe-vinhlong.jpg" alt="Mekong Delta Day 1 – Cai Be & Vinh Long" loading="lazy"></td></tr>
+          <tr><td class="day-col">D4</td><td class="itin-col">Mekong Delta Day 2 – Can Tho &amp; Chau Doc</td><td class="desc-col">A sunrise paddle through Can Tho's floating market, then on to Chau Doc at the edge of the delta, gateway to Cambodia.</td><td class="photo-col"><img src="images/tours/t5d4-cantho-chaudoc.jpg" alt="Mekong Delta Day 2 – Can Tho & Chau Doc" loading="lazy"></td></tr>
+          <tr><td class="day-col">D5</td><td class="itin-col">Mekong Delta Day 3 – Tra Su Forest &amp; Speedboat to Phnom Penh</td><td class="desc-col">A gentle paddle through Tra Su's flooded melaleuca forest at dawn, then a speedboat cruise up the Mekong/Bassac River, crossing the border into Cambodia and arriving in Phnom Penh by afternoon.</td><td class="photo-col"><img src="images/tours/t5d5-trasu-phnompenh.jpg" alt="Mekong Delta Day 3 – Tra Su Forest & Speedboat to Phnom Penh" loading="lazy"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tour-section" id="tour6">
+      <div class="section-hero">
+        <span class="tour-code-tag">Tour 6</span>
+        <h3>Tailor-Made Journey</h3>
+        <p class="subtitle">Fully Customized to Your Guest's Request</p>
+        <div class="meta-bar">
+          <div class="meta-chip"><b>Duration</b>Flexible — 3 to 21+ days</div>
+          <div class="meta-chip"><b>Route</b>Any combination of North, Central &amp; South Vietnam</div>
+          <div class="meta-chip"><b>Pace</b>Set entirely by the guest</div>
+          <div class="meta-chip"><b>Accommodation</b>Matched to guest preference, from boutique to ultra-luxury</div>
+        </div>
+      </div>
+      <div class="note-box"><b>Note:</b> This is not a fixed itinerary — it's a framework. Every element below can be added, removed, or reshaped around the guest's dates, interests, and budget. Use Tours 1–5 as a starting canvas, then swap in any of the building blocks below.</div>
+      <table class="itinerary">
+        <thead>
+          <tr><th>Block</th><th>Itinerary</th><th>Brief Introduction &amp; Explanation</th><th>Photo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="day-col">B1</td><td class="itin-col">Bespoke Accommodation</td><td class="desc-col">Private pool villas, boutique 5-star boutique hotels, or a suite on a luxury Halong Bay cruise — matched to the guest's taste rather than a fixed category.</td><td class="photo-col"><img src="images/tours/t6b1-bespoke-accommodation.jpg" alt="Bespoke Accommodation" loading="lazy"></td></tr>
+          <tr><td class="day-col">B2</td><td class="itin-col">Curated Experiences</td><td class="desc-col">Private chef tables, artisan workshops, off-schedule temple access, trekking, cycling, diving, or a slow afternoon doing nothing at all.</td><td class="photo-col"><img src="images/tours/t6b2-curated-experiences.jpg" alt="Curated Experiences" loading="lazy"></td></tr>
+          <tr><td class="day-col">B3</td><td class="itin-col">Flexible Pace &amp; Duration</td><td class="desc-col">A 3-day city escape or a 21-day grand circuit — the calendar bends to the guest, not the other way round.</td><td class="photo-col"><img src="images/tours/t6b3-flexible-pace.jpg" alt="Flexible Pace & Duration" loading="lazy"></td></tr>
+          <tr><td class="day-col">B4</td><td class="itin-col">Private Transport &amp; Guides</td><td class="desc-col">Dedicated vehicle and driver throughout, an English-speaking guide, and an interpreter on request for any language.</td><td class="photo-col"><img src="images/tours/t6b4-private-transport.jpg" alt="Private Transport & Guides" loading="lazy"></td></tr>
+          <tr><td class="day-col">B5</td><td class="itin-col">Special Requests</td><td class="desc-col">Celebrations, dietary needs, accessibility, photography add-ons, wellness routines — flagged in advance and quietly handled.</td><td class="photo-col"><img src="images/tours/t6b5-special-requests.jpg" alt="Special Requests" loading="lazy"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tour-section" id="tour7">
+      <div class="section-hero">
+        <span class="tour-code-tag">Tour 7</span>
+        <h3>Business Travel &amp; Concierge</h3>
+        <p class="subtitle">Factory Visits, Negotiations &amp; Contract Signing — We Handle Everything Else</p>
+        <div class="meta-bar">
+          <div class="meta-chip"><b>Duration</b>Sample 5 Days / 4 Nights (scales to full trip length)</div>
+          <div class="meta-chip"><b>Route</b>Any city or industrial zone — sample below shows Saigon</div>
+          <div class="meta-chip"><b>Pace</b>Built entirely around the business agenda; leisure is optional add-on</div>
+          <div class="meta-chip"><b>Accommodation</b>5-star business hotel of guest's choice</div>
+        </div>
+      </div>
+      <div class="note-box"><b>Note:</b> Visa arranged in advance, dedicated account manager assigned for the full trip, and a professional interpreter accompanies the guest through every factory visit, negotiation, and signing — not just available on request. Coordination with the guest's local partner/factory confirms the agenda before arrival, and a discreet security/protocol escort can be added for VIP or high-profile guests. Leisure elements are optional add-ons scheduled only around confirmed meeting and site-visit times.</div>
+      <table class="itinerary">
+        <thead>
+          <tr><th>Day</th><th>Itinerary</th><th>Brief Introduction &amp; Explanation</th><th>Photo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="day-col">D1</td><td class="itin-col">VIP Arrival &amp; Fast-Track</td><td class="desc-col">Meet-and-greet at the aircraft door, fast-track immigration and baggage, then a private transfer to the hotel with SIM/Wi-Fi already set up. The assigned interpreter joins for a same-day briefing on the week's factory visits and meetings.</td><td class="photo-col"><img src="images/tours/t7d1-vip-arrival.jpg" alt="VIP Arrival & Fast-Track" loading="lazy"></td></tr>
+          <tr><td class="day-col">D2</td><td class="itin-col">Factory / Production Site Visit</td><td class="desc-col">Private car and dedicated interpreter escort the guest to the partner factory or production facility, sitting in on technical discussions and quality inspections, followed by a working lunch with the local team.</td><td class="photo-col"><img src="images/tours/t7d2-factory-visit.jpg" alt="Factory / Production Site Visit" loading="lazy"></td></tr>
+          <tr><td class="day-col">D3</td><td class="itin-col">Negotiation &amp; Contract Signing</td><td class="desc-col">A full day dedicated to commercial negotiation, with the interpreter at the table throughout; document translation support and signing-ceremony coordination for the final contract, closing with a business dinner to mark the agreement.</td><td class="photo-col"><img src="images/tours/t7d3-negotiation-signing.jpg" alt="Negotiation & Contract Signing" loading="lazy"></td></tr>
+          <tr><td class="day-col">D4</td><td class="itin-col">Second Site Visit or Optional Leisure Half-Day</td><td class="desc-col">A further factory/supplier visit if the agenda calls for it, or a half-day Cu Chi Tunnels or city highlights add-on for downtime, closing with a reserved table for an evening business dinner.</td><td class="photo-col"><img src="images/tours/t7d4-second-site-leisure.jpg" alt="Second Site Visit or Optional Leisure Half-Day" loading="lazy"></td></tr>
+          <tr><td class="day-col">D5</td><td class="itin-col">Departure</td><td class="desc-col">Fast-track check-in and immigration, lounge access, and a private transfer to the airport.</td><td class="photo-col"><img src="images/tours/t7d5-departure-benthanh.jpg" alt="Departure" loading="lazy"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <footer>
+    Prepared for Mr. Babu &middot; The Ant Adventures &middot; Contact: <a href="mailto:taipham@theantadventures.com">Tai Pham</a>
+  </footer>
+</body>
+</html>
